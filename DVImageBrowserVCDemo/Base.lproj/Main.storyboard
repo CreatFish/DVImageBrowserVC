@@ -22,17 +22,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRd-Tv-lde">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="147" y="318" width="80" height="30"/>
+                                <state key="normal" title="push无删除"/>
                                 <connections>
-                                    <action selector="showImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C6N-hY-GjW"/>
+                                    <action selector="showImage1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6o7-Q5-DaW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Aw-Gf-Ruh">
+                                <rect key="frame" x="147" y="280" width="80" height="30"/>
+                                <state key="normal" title="push带删除"/>
+                                <connections>
+                                    <action selector="showImage0:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ByN-cF-fTf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="use-Oc-Hc7">
+                                <rect key="frame" x="143" y="356" width="88" height="30"/>
+                                <state key="normal" title="modal无删除"/>
+                                <connections>
+                                    <action selector="showImage2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5qc-pY-16X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sK-CY-jie">
+                                <rect key="frame" x="143" y="394" width="88" height="30"/>
+                                <state key="normal" title="modal带删除"/>
+                                <connections>
+                                    <action selector="showImage3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DvS-TM-Euu"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="QRd-Tv-lde" firstAttribute="top" secondItem="9Aw-Gf-Ruh" secondAttribute="bottom" constant="8" id="XvK-BE-Jmk"/>
                             <constraint firstItem="QRd-Tv-lde" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zyt-BI-sjm"/>
                             <constraint firstItem="QRd-Tv-lde" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aYm-nW-m2l"/>
+                            <constraint firstItem="7sK-CY-jie" firstAttribute="top" secondItem="use-Oc-Hc7" secondAttribute="bottom" constant="8" id="e9n-jL-jQN"/>
+                            <constraint firstItem="9Aw-Gf-Ruh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jl0-f6-AEg"/>
+                            <constraint firstItem="7sK-CY-jie" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lkI-TA-tx2"/>
+                            <constraint firstItem="use-Oc-Hc7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oWF-9j-Tti"/>
+                            <constraint firstItem="use-Oc-Hc7" firstAttribute="top" secondItem="QRd-Tv-lde" secondAttribute="bottom" constant="8" id="u4s-ec-B0W"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="首页" id="ZfY-zi-Vho"/>

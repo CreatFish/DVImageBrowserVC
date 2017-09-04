@@ -33,6 +33,7 @@
 		4B5124051F56BB0A004B4FEE /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5123F31F56BB0A004B4FEE /* UIImageView+HighlightedWebCache.m */; };
 		4B5124061F56BB0A004B4FEE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5123F51F56BB0A004B4FEE /* UIImageView+WebCache.m */; };
 		4B5124071F56BB0A004B4FEE /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5123F71F56BB0A004B4FEE /* UIView+WebCacheOperation.m */; };
+		4BCE18F91F5D308A00623D29 /* DVIBVC_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCE18F81F5D308A00623D29 /* DVIBVC_Back@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		4B5123F51F56BB0A004B4FEE /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		4B5123F61F56BB0A004B4FEE /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		4B5123F71F56BB0A004B4FEE /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		4BCE18F81F5D308A00623D29 /* DVIBVC_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DVIBVC_Back@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		4B250CD01F57DAE0009E3011 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4BCE18F81F5D308A00623D29 /* DVIBVC_Back@2x.png */,
 				4B250CD31F57DC20009E3011 /* DVIBVC_Delete@2x.png */,
 			);
 			path = Resources;
@@ -361,6 +364,7 @@
 				4B4CF4601F5535A200085FBF /* Assets.xcassets in Resources */,
 				4B5123F81F56BB0A004B4FEE /* LICENSE in Resources */,
 				4B4CF45E1F5535A200085FBF /* Main.storyboard in Resources */,
+				4BCE18F91F5D308A00623D29 /* DVIBVC_Back@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,23 +15,22 @@ import UIKit
 
 class DVImageBrowserVC: UIViewController {
     
+    /// 有导航栏存在时，设置了也无效，需要设置self.navigationController?.navigationBar.barStyle = UIBarStyle.black才能改成白色
+    /// 这里是为了防止状态栏文字是黑色影响视觉效果
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        get {
+            return UIStatusBarStyle.lightContent
+        }
+    }
+    
     /// 删除按钮
     fileprivate lazy var deleteBtn: UIButton! = {
-        let btn = UIButton(frame: CGRect(x: UIScreen.main.bounds.width-45, y: 20, width: 30, height: 30))
+        let btn = UIButton()
         btn.setImage(UIImage(named: "DVIBVC_Delete@2x"), for: UIControlState.normal)
         btn.addTarget(self, action: #selector(self.deleteImage), for: UIControlEvents.touchUpInside)
-        btn.isHidden = true
         return btn
     }()
     
-    /// 导航栏上的删除按钮
-    fileprivate lazy var navDeleteBtn: UIButton! = {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        btn.setImage(UIImage(named: "DVIBVC_Delete@2x"), for: UIControlState.normal)
-        btn.addTarget(self, action: #selector(self.deleteImage), for: UIControlEvents.touchUpInside)
-        btn.isHidden = true
-        return btn
-    }()
     /// 导航栏标题
     fileprivate lazy var titleLabel: UILabel! = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
@@ -94,24 +93,54 @@ class DVImageBrowserVC: UIViewController {
         }
     }
     /// 删除block
-    fileprivate var deleteBlock: ((Int)->Void)?
-    /// 转场方式
-    fileprivate var transitionType = DVImageVCTransitionType.modal {
+    fileprivate var deleteBlock: ((Int)->Void)? {
         didSet {
-            if transitionType == DVImageVCTransitionType.modal && deleteBlock != nil {
-                deleteBtn.isHidden = false
+            if deleteBlock == nil {
+                self.deleteBtn.isHidden = true
             } else {
-                deleteBtn.isHidden = true
+                self.deleteBtn.isHidden = false
             }
-            
-//            if transitionType == DVImageVCTransitionType.push && deleteBlock != nil {
-//                navDeleteBtn.isHidden = false
-//                self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navDeleteBtn)
-//                self.navigationItem.titleView = self.titleLabel
-//                self.titleLabel.text = "\((self.index ?? 0) + 1)/\(self.images?.count ?? 0)"
-//            } else {
-//                navDeleteBtn.isHidden = true
-//            }
+        }
+    }
+    /// 转场方式
+    fileprivate var transitionType = DVImageVCTransitionType.modal
+    
+    /// 是否隐藏导航栏与状态栏 push转场时，点击屏幕隐藏或者显示导航栏
+    fileprivate var hiddenNav = false {
+        didSet {
+            if self.transitionType == DVImageVCTransitionType.modal {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.setNeedsStatusBarAppearanceUpdate()
+                })
+            } else if self.transitionType == DVImageVCTransitionType.push {
+                guard self.navigationController != nil else {
+                    return
+                }
+                let bar = self.navigationController!.navigationBar
+                var tran = bar.transform
+                
+                if hiddenNav {
+                    tran.ty = -64
+                } else {
+                    tran = CGAffineTransform.identity
+                }
+                UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                    bar.transform = tran
+                    self.setNeedsStatusBarAppearanceUpdate()
+                }, completion: nil)
+            }
+        }
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        get {
+            return UIStatusBarAnimation.slide
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        get {
+            return hiddenNav
         }
     }
     
@@ -121,12 +150,7 @@ class DVImageBrowserVC: UIViewController {
             self.titleLabel.textColor = titleColor
         }
     }
-    /// 导航栏删除按钮的图片
-    var navDeleteBtnImage: UIImage? {
-        didSet {
-            self.navDeleteBtn.setImage(navDeleteBtnImage, for: UIControlState.normal)
-        }
-    }
+
     /// 删除按钮的图片
     var deleteBtnImage: UIImage? {
         didSet {
@@ -145,6 +169,49 @@ class DVImageBrowserVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        hiddenNav = true
+    }
+    
+    /// 原先导航控制器右滑是否enable
+    var popGestureRecognizer: Bool?
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.transitionType == DVImageVCTransitionType.push {
+            /// 暂时关闭导航控制器的右滑，否则会有一个显示上的bug，经测试，微信上也存在此显示bug,呆修复
+            popGestureRecognizer = self.navigationController?.interactivePopGestureRecognizer?.isEnabled
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.transitionType == DVImageVCTransitionType.push {
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = popGestureRecognizer ?? true
+            guard self.navigationController != nil else {
+                return
+            }
+            let bar = self.navigationController!.navigationBar
+            var tran = bar.transform
+            tran = CGAffineTransform.identity
+            bar.transform = tran
+        } else if self.transitionType == DVImageVCTransitionType.modal {
+            hiddenNav = false
+        }
+    }
+    
+    /*!
+     显示图片浏览器，支持modal与push两种转场
+     
+     @param target                  控制器，传入上个界面的控制
+     @param transitionType          转场方式，modal或者push
+     @param images                  图片数组，可以传入uimage数组或者string数组
+     @param index                   当前索引，传入需要当前显示图片的索引
+     @param deleteBlock             删除回调，传入nil时，不会显示删除按钮
+     
+     @discussion
+     */
     class func show(target: UIViewController!, transitionType: DVImageVCTransitionType, images: [Any]?, index: Int, deleteBlock: ((Int)->Void)?) {
         let vc = DVImageBrowserVC()
         vc.index = index < 0 ? 0 : index
@@ -160,25 +227,23 @@ class DVImageBrowserVC: UIViewController {
         }
     }
     
-    //override var prefersStatusBarHidden: Bool {
-    //    get {
-    //       if transitionType == DVImageVCTransitionType.push {
-    //            return false
-    //        } else {
-    //            return true
-    //        }
-    //    }
-    //}
-    
     func setView() {
+        self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.black
         self.view.addSubview(imageCollection)
-        self.view.addSubview(deleteBtn)
         self.view.addSubview(pageControl)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navDeleteBtn)
         self.navigationItem.titleView = self.titleLabel
         self.titleLabel.text = "\((self.index ?? 0) + 1)/\(self.images?.count ?? 0)"
+        if self.transitionType == DVImageVCTransitionType.push {
+            deleteBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+            let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+            spaceItem.width = -15
+            self.navigationItem.rightBarButtonItems = [spaceItem,UIBarButtonItem(customView: deleteBtn)]
+        } else if self.transitionType == DVImageVCTransitionType.modal {
+            deleteBtn.frame = CGRect(x: UIScreen.main.bounds.width-45, y: 20, width: 30, height: 30)
+            self.view.addSubview(deleteBtn)
+        }
     }
     
     /// 删除图片
@@ -198,6 +263,7 @@ class DVImageBrowserVC: UIViewController {
             self.titleLabel.text = "\((self.index ?? 0) + 1)/\(self.images?.count ?? 0)"
         }
     }
+
 }
 
 extension DVImageBrowserVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -215,10 +281,20 @@ extension DVImageBrowserVC: UICollectionViewDelegate, UICollectionViewDataSource
         
         (cell as? DVImageCell)?.image = self.images?[indexPath.row]
         (cell as? DVImageCell)?.singleTapBolck = {
-            self.dismiss(animated: true, completion: nil)
+            if self.transitionType == DVImageVCTransitionType.push {
+                self.hiddenNav = !self.hiddenNav
+            } else if self.transitionType == DVImageVCTransitionType.modal {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
         
         return cell
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if self.transitionType == DVImageVCTransitionType.push && hiddenNav == false {
+            hiddenNav = true
+        }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
