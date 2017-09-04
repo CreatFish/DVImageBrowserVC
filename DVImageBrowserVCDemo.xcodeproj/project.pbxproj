@@ -567,7 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2abf0af1-e2d1-4f86-979b-fe03acc20ba0";
 				PROVISIONING_PROFILE_SPECIFIER = amalltestDevelopment;
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/lihualei/Documents/DVImageBrowserVCDemo/DVImageBrowserVCDemo/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/DVImageBrowserVCDemo/Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -583,7 +583,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.amall360.amalltest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/lihualei/Documents/DVImageBrowserVCDemo/DVImageBrowserVCDemo/Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/DVImageBrowserVCDemo/Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
