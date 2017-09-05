@@ -3,4 +3,4 @@
 
   运行效果    
   
-  <img src="https://github.com/CreatFish/DVImageBrowserVC/blob/master/gif/nhouLFGWmo.gif">
+  <img src="https://github.com/CreatFish/DVImageBrowserVC/blob/master/gif/saQhOpdAJr.gif">
