@@ -11,4 +11,10 @@
   ## 二. Example 例子    
   let images = [UIImage(named: "dnf1"),UIImage(named: "dnf2"),UIImage(named: "dnf3"),UIImage(named: "dnf4"),UIImage(named:   "dnf5"),UIImage(named: "dnf6"),UIImage(named: "dnf7")]   
   //可以传入url数组用来显示网络图片    
-  DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: images, index: 0, deleteBlock: nil)
+  DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: images, index: 0, deleteBlock: nil)    
+  
+  ## 三. Requirements 要求
+   iOS8及以上系统可使用. ARC环境. 
+   
+   ## 四. More 更多 
+   如果你发现了bug,请与我联系，邮箱:654070281@qq.com
