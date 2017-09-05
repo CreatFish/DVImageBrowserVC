@@ -35,8 +35,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showImage1(_ sender: UIButton) {
-        let images = [UIImage(named: "dnf1"),UIImage(named: "dnf2"),UIImage(named: "dnf3"),UIImage(named: "dnf4"),UIImage(named: "dnf5"),UIImage(named: "dnf6"),UIImage(named: "dnf7")]
-        DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: images, index: 1) { (index) in
+        let urls = ["https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf1.imageset/dnf1.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf2.imageset/dnf2.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf3.imageset/dnf3.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf4.imageset/dnf4.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf5.imageset/dnf5.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf6.imageset/dnf6.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf7.imageset/dnf7.png"]
+        DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: urls, index: 1) { (index) in
             
         }
     }
@@ -47,8 +47,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showImage3(_ sender: UIButton) {
-        let images = [UIImage(named: "dnf1"),UIImage(named: "dnf2"),UIImage(named: "dnf3"),UIImage(named: "dnf4"),UIImage(named: "dnf5"),UIImage(named: "dnf6"),UIImage(named: "dnf7")]
-        DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.modal, images: images, index: 3) { (index) in
+        let urls = ["https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf1.imageset/dnf1.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf2.imageset/dnf2.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf3.imageset/dnf3.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf4.imageset/dnf4.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf5.imageset/dnf5.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf6.imageset/dnf6.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf7.imageset/dnf7.png"]
+        DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.modal, images: urls, index: 3) { (index) in
             
         }
     }

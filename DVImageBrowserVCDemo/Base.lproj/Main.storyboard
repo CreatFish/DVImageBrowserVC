@@ -23,14 +23,14 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRd-Tv-lde">
                                 <rect key="frame" x="147" y="318" width="80" height="30"/>
-                                <state key="normal" title="push无删除"/>
+                                <state key="normal" title="push带删除"/>
                                 <connections>
                                     <action selector="showImage1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6o7-Q5-DaW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Aw-Gf-Ruh">
                                 <rect key="frame" x="147" y="280" width="80" height="30"/>
-                                <state key="normal" title="push带删除"/>
+                                <state key="normal" title="push无删除"/>
                                 <connections>
                                     <action selector="showImage0:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ByN-cF-fTf"/>
                                 </connections>
