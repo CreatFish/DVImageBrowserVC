@@ -35,7 +35,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showImage1(_ sender: UIButton) {
-        let urls = ["https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf1.imageset/dnf1.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf2.imageset/dnf2.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf3.imageset/dnf3.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf4.imageset/dnf4.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf5.imageset/dnf5.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf6.imageset/dnf6.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf7.imageset/dnf7.png"]
+        let urls = ["https://image.amall360.com/imageService/uploadFiles/1/dnf1.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf2.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf3.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf4.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf5.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf6.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf7.png"]
         DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: urls, index: 1) { (index) in
             
         }
@@ -47,7 +53,13 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showImage3(_ sender: UIButton) {
-        let urls = ["https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf1.imageset/dnf1.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf2.imageset/dnf2.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf3.imageset/dnf3.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf4.imageset/dnf4.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf5.imageset/dnf5.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf6.imageset/dnf6.png","https://github.com/CreatFish/DVImageBrowserVC/blob/master/DVImageBrowserVCDemo/Assets.xcassets/dnf7.imageset/dnf7.png"]
+        let urls = ["https://image.amall360.com/imageService/uploadFiles/1/dnf1.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf2.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf3.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf4.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf5.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf6.png",
+                    "https://image.amall360.com/imageService/uploadFiles/1/dnf7.png"]
         DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.modal, images: urls, index: 3) { (index) in
             
         }

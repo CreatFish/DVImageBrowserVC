@@ -22,8 +22,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRd-Tv-lde">
-                                <rect key="frame" x="147" y="318" width="80" height="30"/>
-                                <state key="normal" title="push带删除"/>
+                                <rect key="frame" x="111" y="318" width="152" height="30"/>
+                                <state key="normal" title="push带删除(网络图片)"/>
                                 <connections>
                                     <action selector="showImage1:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6o7-Q5-DaW"/>
                                 </connections>
@@ -43,8 +43,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sK-CY-jie">
-                                <rect key="frame" x="143" y="394" width="88" height="30"/>
-                                <state key="normal" title="modal带删除"/>
+                                <rect key="frame" x="107" y="394" width="160" height="30"/>
+                                <state key="normal" title="modal带删除(网络图片)"/>
                                 <connections>
                                     <action selector="showImage3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DvS-TM-Euu"/>
                                 </connections>
