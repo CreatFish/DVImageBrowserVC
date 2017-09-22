@@ -71,6 +71,18 @@ class DVImageBrowserVC: UIViewController {
         
         return page
     }()
+    /// pageControl正常的的图片
+    var pageNoramlImg: UIImage? {
+        didSet {
+            self.pageControl.setValue(pageNoramlImg, forKeyPath: "_pageImage")
+        }
+    }
+    /// pageControl当前选中的图片
+    var pageCurrentImg: UIImage? {
+        didSet {
+            self.pageControl.setValue(pageCurrentImg, forKeyPath: "_currentPageImage")
+        }
+    }
     
     /// 图片集合，可以传入图片数组或者字符串数组，其他无效
     fileprivate var images: [Any]? {
@@ -178,11 +190,11 @@ class DVImageBrowserVC: UIViewController {
     var popGestureRecognizer: Bool?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if self.transitionType == DVImageVCTransitionType.push {
-            /// 暂时关闭导航控制器的右滑，否则会有一个显示上的bug，经测试，微信上也存在此显示bug,呆修复
-            popGestureRecognizer = self.navigationController?.interactivePopGestureRecognizer?.isEnabled
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        }
+//        if self.transitionType == DVImageVCTransitionType.push {
+//            /// 暂时关闭导航控制器的右滑，否则会有一个显示上的bug，经测试，微信上也存在此显示bug,呆修复
+//            popGestureRecognizer = self.navigationController?.interactivePopGestureRecognizer?.isEnabled
+//            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -212,7 +224,7 @@ class DVImageBrowserVC: UIViewController {
      
      @discussion
      */
-    class func show(target: UIViewController!, transitionType: DVImageVCTransitionType, images: [Any]?, index: Int, deleteBlock: ((Int)->Void)?) {
+    class func show(target: UIViewController!, transitionType: DVImageVCTransitionType, images: [Any]?, index: Int, deleteBlock: ((Int)->Void)?) -> DVImageBrowserVC {
         let vc = DVImageBrowserVC()
         vc.index = index < 0 ? 0 : index
         vc.images = images
@@ -225,6 +237,8 @@ class DVImageBrowserVC: UIViewController {
         } else if transitionType == DVImageVCTransitionType.push {
             target.navigationController?.pushViewController(vc, animated: true)
         }
+        
+        return vc
     }
     
     func setView() {
@@ -285,6 +299,11 @@ extension DVImageBrowserVC: UICollectionViewDelegate, UICollectionViewDataSource
                 self.hiddenNav = !self.hiddenNav
             } else if self.transitionType == DVImageVCTransitionType.modal {
                 self.dismiss(animated: true, completion: nil)
+            }
+        }
+        (cell as? DVImageCell)?.gestureBlock = {
+            if self.transitionType == DVImageVCTransitionType.push && self.hiddenNav == false {
+                self.hiddenNav = true
             }
         }
         

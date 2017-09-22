@@ -24,6 +24,8 @@ class DVImageCell: UICollectionViewCell {
     fileprivate var singleTap: UITapGestureRecognizer!
     /// 双击手势
     fileprivate var doubleTap: UITapGestureRecognizer!
+    /// 缩放图片回调，缩放的时候隐藏导航栏
+    var gestureBlock: (()->Void)?
     /// 进度圈圈
     fileprivate lazy var progressLayer: CAShapeLayer! = {
         let circleLayer = CAShapeLayer()
@@ -129,6 +131,7 @@ class DVImageCell: UICollectionViewCell {
      双击图片操作，放大图片
      */
     func handleDoubleTap(gestureRecognizer: UITapGestureRecognizer) {
+        self.gestureBlock?()
         var zoomScale = scroll.zoomScale
         zoomScale = zoomScale <= 1.0 ? 2.0 : 1.0
         let zoomRect = self.getRectScale(scale: zoomScale, center: gestureRecognizer.location(in: gestureRecognizer.view))
@@ -151,6 +154,7 @@ extension DVImageCell: UIScrollViewDelegate {
     }
 
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        self.gestureBlock?()
         let offsetX = scrollView.bounds.width > scrollView.contentSize.width ? (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5 : 0
         let offsetY = scrollView.bounds.height > scrollView.contentSize.height ? (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5 : 0
         imageView.center = CGPoint(x: scrollView.contentSize.width*0.5+offsetX, y: scrollView.contentSize.height*0.5+offsetY)
