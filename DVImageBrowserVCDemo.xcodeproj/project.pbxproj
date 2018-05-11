@@ -34,6 +34,7 @@
 		4B5124061F56BB0A004B4FEE /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5123F51F56BB0A004B4FEE /* UIImageView+WebCache.m */; };
 		4B5124071F56BB0A004B4FEE /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5123F71F56BB0A004B4FEE /* UIView+WebCacheOperation.m */; };
 		4BCE18F91F5D308A00623D29 /* DVIBVC_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BCE18F81F5D308A00623D29 /* DVIBVC_Back@2x.png */; };
+		566F8F7F20A58A8400BD2096 /* DVActionSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F8F7E20A58A8400BD2096 /* DVActionSheetVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		4B5123F61F56BB0A004B4FEE /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		4B5123F71F56BB0A004B4FEE /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		4BCE18F81F5D308A00623D29 /* DVIBVC_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DVIBVC_Back@2x.png"; sourceTree = "<group>"; };
+		566F8F7E20A58A8400BD2096 /* DVActionSheetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVActionSheetVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 			children = (
 				4B5123D71F56BB0A004B4FEE /* SDWebImage */,
 				4B4CF4881F55361C00085FBF /* DVImageBrowserVC */,
+				566F8F7D20A58A8400BD2096 /* DVActionSheetVC */,
 				4B4CF4581F5535A200085FBF /* AppDelegate.swift */,
 				4B4CF45A1F5535A200085FBF /* ViewController.swift */,
 				4B4CF45C1F5535A200085FBF /* Main.storyboard */,
@@ -249,6 +252,14 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		566F8F7D20A58A8400BD2096 /* DVActionSheetVC */ = {
+			isa = PBXGroup;
+			children = (
+				566F8F7E20A58A8400BD2096 /* DVActionSheetVC.swift */,
+			);
+			path = DVActionSheetVC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -318,7 +329,7 @@
 					4B4CF4541F5535A200085FBF = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = W44VGDHSN2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					4B4CF4681F5535A200085FBF = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -407,6 +418,7 @@
 				4B5124061F56BB0A004B4FEE /* UIImageView+WebCache.m in Sources */,
 				4B5124001F56BB0A004B4FEE /* SDWebImageManager.m in Sources */,
 				4B5123FD1F56BB0A004B4FEE /* SDWebImageDecoder.m in Sources */,
+				566F8F7F20A58A8400BD2096 /* DVActionSheetVC.swift in Sources */,
 				4B5123FB1F56BB0A004B4FEE /* SDImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,14 +571,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W44VGDHSN2;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DVImageBrowserVCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.amall360.amalltest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2abf0af1-e2d1-4f86-979b-fe03acc20ba0";
-				PROVISIONING_PROFILE_SPECIFIER = amalltestDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/DVImageBrowserVCDemo/Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -576,6 +590,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DVImageBrowserVCDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

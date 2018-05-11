@@ -16,38 +16,6 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.black
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
-        label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.textColor = UIColor.white
-        label.textAlignment = NSTextAlignment.center
-        label.text = "首页"
-        self.navigationItem.titleView = label
-        
-//        var outCount: UInt32 = 0
-//        let vars = class_copyIvarList(self.navigationController?.navigationBar.classForCoder, &outCount)
-//        for i in 0..<outCount {
-//            let ivar = vars?[Int(i)]
-//            let ivarName = ivar_getName(ivar)
-//            if ivarName != nil {
-//                let nName = String(cString: ivarName!)
-//                print(nName)
-//            }
-//        }
-        var outCount: UInt32 = 0
-        let methods = class_copyMethodList(self.navigationController?.classForCoder, &outCount)
-        for i in 0..<outCount {
-            let method = methods?[Int(i)]
-            let methodName = method_getName(method)
-            if methodName != nil {
-                print(NSStringFromSelector(methodName!))
-            }
-        }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(self.navigationController?.navigationBar.transform)
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,9 +25,13 @@ class ViewController: UIViewController {
     
     @IBAction func showImage0(_ sender: UIButton) {
         let images = [UIImage(named: "dnf1"),UIImage(named: "dnf2"),UIImage(named: "dnf3"),UIImage(named: "dnf4"),UIImage(named: "dnf5"),UIImage(named: "dnf6"),UIImage(named: "dnf7")]
-        let vc = DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: images, index: 0, deleteBlock: nil)
+        let vc = DVImageBrowserVC()
+        vc.images = images
+        vc.index = 2
         vc.pageCurrentImg = UIImage(named: "pageCurrentImg")
         vc.pageNoramlImg = UIImage(named: "pageNoramlImg")
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func showImage1(_ sender: UIButton) {
@@ -70,18 +42,25 @@ class ViewController: UIViewController {
                     "https://image.amall360.com/imageService/uploadFiles/1/dnf5.png",
                     "https://image.amall360.com/imageService/uploadFiles/1/dnf6.png",
                     "https://image.amall360.com/imageService/uploadFiles/1/dnf7.png"]
-        let vc = DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.push, images: urls, index: 1) { (index) in
-            
-        }
+        let vc = DVImageBrowserVC()
+        vc.images = urls
+        vc.index = 2
         vc.pageCurrentImg = UIImage(named: "pageCurrentImg")
         vc.pageNoramlImg = UIImage(named: "pageNoramlImg")
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     @IBAction func showImage2(_ sender: UIButton) {
         let images = [UIImage(named: "dnf1"),UIImage(named: "dnf2"),UIImage(named: "dnf3"),UIImage(named: "dnf4"),UIImage(named: "dnf5"),UIImage(named: "dnf6"),UIImage(named: "dnf7")]
-        let vc = DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.modal, images: images, index: 2, deleteBlock: nil)
+        let vc = DVImageBrowserVC()
+        vc.images = images
+        vc.index = 2
         vc.pageCurrentImg = UIImage(named: "pageCurrentImg")
         vc.pageNoramlImg = UIImage(named: "pageNoramlImg")
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
     }
 
     @IBAction func showImage3(_ sender: UIButton) {
@@ -91,11 +70,28 @@ class ViewController: UIViewController {
                     "https://image.amall360.com/imageService/uploadFiles/1/dnf5.png",
                     "https://image.amall360.com/imageService/uploadFiles/1/dnf6.png",
                     "https://image.amall360.com/imageService/uploadFiles/1/dnf7.png"]
-        let vc = DVImageBrowserVC.show(target: self, transitionType: DVImageVCTransitionType.modal, images: urls, index: 3) { (index) in
-            
-        }
+        let vc = DVImageBrowserVC()
+        vc.images = urls
+        vc.index = 2
         vc.pageCurrentImg = UIImage(named: "pageCurrentImg")
         vc.pageNoramlImg = UIImage(named: "pageNoramlImg")
+        vc.delegate = self
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+}
+
+extension ViewController: DVImageBrowserVCDelegate {
+    
+    func imageBrowserVC(_ target: DVImageBrowserVC, deleteImgAt imageIndex: Int) {
+        print("删除方法")
+    }
+    
+    func imageBrowserVC(_ target: DVImageBrowserVC, longPressAt imageIndex: Int) {
+        let vc = DVActionSheetVC()
+        vc.footerTitle = "取消"
+        vc.moreButtonTitles = ["分享到","识别图中的二维码","收藏","保存图片","编辑"]
+        target.present(vc, animated: true, completion: nil)
     }
     
 }
