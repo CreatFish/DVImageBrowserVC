@@ -31,8 +31,8 @@ class DVImageBrowserVC: UIViewController {
     /// 删除按钮
     fileprivate lazy var deleteBtn: UIButton! = {
         let btn = UIButton()
-        btn.setImage(UIImage(named: "DVIBVC_Delete@2x"), for: UIControlState.normal)
-        btn.addTarget(self, action: #selector(self.deleteImage), for: UIControlEvents.touchUpInside)
+        btn.setImage(UIImage(named: "DVIBVC_Delete@2x"), for: UIControl.State.normal)
+        btn.addTarget(self, action: #selector(self.deleteImage), for: UIControl.Event.touchUpInside)
         return btn
     }()
     /// 导航栏标题
@@ -53,7 +53,7 @@ class DVImageBrowserVC: UIViewController {
         /// 水平方向的间距
         layout.minimumInteritemSpacing = 0
         /// 设置为水平滚动
-        layout.scrollDirection = UICollectionViewScrollDirection.horizontal
+        layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let collection: UICollectionView! = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), collectionViewLayout: layout)
         collection.backgroundColor = UIColor.black
@@ -123,7 +123,7 @@ class DVImageBrowserVC: UIViewController {
             } else {
                 tran = CGAffineTransform.identity
             }
-            UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 bar.transform = tran
                 self.setNeedsStatusBarAppearanceUpdate()
             }, completion: nil)
@@ -140,7 +140,7 @@ class DVImageBrowserVC: UIViewController {
     /// 删除按钮的图片
     var deleteBtnImage: UIImage? {
         didSet {
-            self.deleteBtn.setImage(deleteBtnImage, for: UIControlState.normal)
+            self.deleteBtn.setImage(deleteBtnImage, for: UIControl.State.normal)
         }
     }
     
@@ -180,7 +180,7 @@ class DVImageBrowserVC: UIViewController {
         if canDelegate {
             if self.navigationController != nil {
                 deleteBtn.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
-                let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+                let spaceItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
                 spaceItem.width = -15
                 self.navigationItem.rightBarButtonItems = [spaceItem,UIBarButtonItem(customView: deleteBtn)]
             } else {
@@ -191,7 +191,7 @@ class DVImageBrowserVC: UIViewController {
     }
     
     /// 删除图片
-    func deleteImage() {
+    @objc func deleteImage() {
         delegate?.imageBrowserVC?(self, deleteImgAt: self.index)
         var imgs = self.images
         imgs?.remove(at: self.index)

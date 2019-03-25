@@ -9,8 +9,6 @@
 #ifndef Header_h
 #define Header_h
 
-#import "UIImageView+WebCache.h"
-#import "SDWebImageManager.h"
 //#import <objc/message.h>
 //#import <objc/runtime.h>
 

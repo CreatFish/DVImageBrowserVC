@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 /*!
  用来显示图片的Cell
@@ -72,18 +73,17 @@ class DVImageCell: UICollectionViewCell {
                 imageView.image = image as? UIImage
             } else if image is String || image is NSString {
                 let url = (image as? String) ?? ""
-                let isCached = SDWebImageManager.shared().cachedImageExists(for: URL(string: url))
-                if isCached {
-                    //有缓存
-                    let image = SDImageCache.shared().imageFromDiskCache(forKey: url)
-                    imageView.image = image
-                } else {
-                    //没有缓存
-                    imageView.sd_setImage(with: URL(string: url), placeholderImage: nil, options: SDWebImageOptions(), progress: { (receivedSize, allSize) in
-                        self.progress = (Double)(receivedSize) / (Double)(allSize)
-                    }, completed: { (image, error, type, url) in
-                        print("-------------")
-                    })
+                SDWebImageManager.shared().cachedImageExists(for: URL(string: url)) { (isCached) in
+                    if isCached {
+                        //有缓存
+                        let image = SDImageCache.shared().imageFromDiskCache(forKey: url)
+                        self.imageView.image = image
+                    } else {
+                        //没有缓存
+                        self.imageView.sd_setImage(with: URL(string: url), placeholderImage: nil, options: SDWebImageOptions(), progress: { (receivedSize, allSize, url) in
+                            self.progress = (Double)(receivedSize) / (Double)(allSize)
+                        }, completed: nil)
+                    }
                 }
             }
         }
@@ -101,7 +101,7 @@ class DVImageCell: UICollectionViewCell {
         self.contentView.addSubview(scroll)
         
         imageView = UIImageView(frame: scroll.bounds)
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIView.ContentMode.scaleAspectFit
         imageView.isUserInteractionEnabled = true
         scroll.addSubview(imageView)
         
@@ -123,14 +123,14 @@ class DVImageCell: UICollectionViewCell {
     /*!
      单击图片操作，使图片浏览器消失
      */
-    func handleSingleTap(gestureRecognizer: UITapGestureRecognizer) {
+    @objc func handleSingleTap(gestureRecognizer: UITapGestureRecognizer) {
         self.singleTapBolck?()
     }
     
     /*!
      双击图片操作，放大图片
      */
-    func handleDoubleTap(gestureRecognizer: UITapGestureRecognizer) {
+    @objc func handleDoubleTap(gestureRecognizer: UITapGestureRecognizer) {
         self.gestureBlock?()
         var zoomScale = scroll.zoomScale
         zoomScale = zoomScale <= 1.0 ? 2.0 : 1.0

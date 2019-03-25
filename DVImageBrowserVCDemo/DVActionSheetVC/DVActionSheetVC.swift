@@ -30,7 +30,7 @@ class DVActionSheetVC: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.bounces = false
-        table.separatorStyle = UITableViewCellSeparatorStyle.none
+        table.separatorStyle = UITableViewCell.SeparatorStyle.none
         table.register(DVActionCell.classForCoder(), forCellReuseIdentifier: "DVActionCell")
         table.register(DVActionFooter.classForCoder(), forHeaderFooterViewReuseIdentifier: "DVActionFooter")
         table.register(DVActionHeader.classForCoder(), forHeaderFooterViewReuseIdentifier: "DVActionHeader")
@@ -161,7 +161,7 @@ extension DVActionSheetVC: UITableViewDelegate, UITableViewDataSource {
             let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DVActionFooter") as! DVActionFooter
             footer.titleColor = footerTitleColor
             footer.title = footerTitle
-            footer.label.addTarget(self, action: #selector(self.hide), for: UIControlEvents.touchUpInside)
+            footer.label.addTarget(self, action: #selector(self.hide), for: UIControl.Event.touchUpInside)
             return footer
         }
         return nil
@@ -287,7 +287,7 @@ class DVActionCell: UITableViewCell {
     }
     var label = UILabel()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = UIColor.white
         label.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: kActionSheetCellHeight)
@@ -365,12 +365,12 @@ class DVActionHeader: UITableViewHeaderFooterView {
 class DVActionFooter: UITableViewHeaderFooterView {
     var title: String? {
         didSet {
-            label.setTitle(title, for: UIControlState.normal)
+            label.setTitle(title, for: UIControl.State.normal)
         }
     }
     var titleColor: UIColor? {
         didSet {
-            label.setTitleColor(titleColor, for: UIControlState.normal)
+            label.setTitleColor(titleColor, for: UIControl.State.normal)
         }
     }
     var label = UIButton()
@@ -385,7 +385,7 @@ class DVActionFooter: UITableViewHeaderFooterView {
         
         label.frame = CGRect(x: 0, y: 3, width: UIScreen.main.bounds.width, height: kActionSheetCellHeight)
         label.backgroundColor = UIColor.white
-        label.setBackgroundImage(UIImage.ImageFromColor(UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 0.9), frame: label.bounds), for: UIControlState.highlighted)
+        label.setBackgroundImage(UIImage.ImageFromColor(UIColor(red: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 0.9), frame: label.bounds), for: UIControl.State.highlighted)
         label.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         label.titleLabel?.textAlignment = NSTextAlignment.center
         self.contentView.addSubview(label)
