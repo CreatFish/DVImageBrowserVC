@@ -7,7 +7,7 @@
 //
 
 // MARK:-   DVImageBrowserVC代理
-@objc protocol DVImageBrowserVCDelegate: NSObjectProtocol {
+@objc public protocol DVImageBrowserVCDelegate: NSObjectProtocol {
     //  删除代理
     @objc optional func imageBrowserVC(_ target: DVImageBrowserVC, deleteImgAt imageIndex: Int)
     //  长按代理
@@ -19,7 +19,7 @@ import UIKit
 
 public class DVImageBrowserVC: UIViewController {
     
-    var delegate: DVImageBrowserVCDelegate?
+    public var delegate: DVImageBrowserVCDelegate?
     /// 有导航栏存在时，设置了也无效，需要设置self.navigationController?.navigationBar.barStyle = UIBarStyle.black才能改成白色
     /// 这里是为了防止状态栏文字是黑色影响视觉效果
     override public var preferredStatusBarStyle: UIStatusBarStyle {
@@ -78,26 +78,26 @@ public class DVImageBrowserVC: UIViewController {
         return page
     }()
     /// 图片集合，可以传入图片数组或者字符串数组，其他无效
-    var images: [Any]? {
+    public var images: [Any]? {
         didSet {
             self.imageCollection.reloadData()
             self.pageControl.numberOfPages = images?.count ?? 0
         }
     }
     /// pageControl正常的的图片
-    var pageNoramlImg: UIImage? {
+    public var pageNoramlImg: UIImage? {
         didSet {
             self.pageControl.setValue(pageNoramlImg, forKeyPath: "_pageImage")
         }
     }
     /// pageControl当前选中的图片
-    var pageCurrentImg: UIImage? {
+    public var pageCurrentImg: UIImage? {
         didSet {
             self.pageControl.setValue(pageCurrentImg, forKeyPath: "_currentPageImage")
         }
     }
     /// 当前正在显示的图片的索引
-    var index: Int! {
+    public var index: Int! {
         didSet {
             self.pageControl.currentPage = index
             if self.index >= images?.count ?? 1 {
@@ -131,14 +131,14 @@ public class DVImageBrowserVC: UIViewController {
     }
     
     /// 导航栏标题颜色
-    var titleColor = UIColor.white {
+    public var titleColor = UIColor.white {
         didSet {
             self.titleLabel.textColor = titleColor
         }
     }
 
     /// 删除按钮的图片
-    var deleteBtnImage: UIImage? {
+    public var deleteBtnImage: UIImage? {
         didSet {
             self.deleteBtn.setImage(deleteBtnImage, for: UIControl.State.normal)
         }
