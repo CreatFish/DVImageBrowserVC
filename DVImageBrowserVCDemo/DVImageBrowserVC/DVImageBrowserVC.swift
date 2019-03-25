@@ -17,12 +17,12 @@
 
 import UIKit
 
-class DVImageBrowserVC: UIViewController {
+public class DVImageBrowserVC: UIViewController {
     
     var delegate: DVImageBrowserVCDelegate?
     /// 有导航栏存在时，设置了也无效，需要设置self.navigationController?.navigationBar.barStyle = UIBarStyle.black才能改成白色
     /// 这里是为了防止状态栏文字是黑色影响视觉效果
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
         get {
             return UIStatusBarStyle.lightContent
         }
@@ -144,18 +144,18 @@ class DVImageBrowserVC: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         hiddenNav = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override public func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         /// 当导航处于屏幕外面时直接右滑让导航栏复位，否则滑出去之后导航栏会消失
         guard self.navigationController != nil else {
@@ -221,15 +221,15 @@ class DVImageBrowserVC: UIViewController {
 
 extension DVImageBrowserVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DVImageCell", for: indexPath)
         (cell as? DVImageCell)?.image = self.images?[indexPath.row]
         (cell as? DVImageCell)?.singleTapBolck = {
@@ -247,13 +247,13 @@ extension DVImageBrowserVC: UICollectionViewDelegate, UICollectionViewDataSource
         return cell
     }
     
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if self.navigationController != nil && self.hiddenNav == false {
             hiddenNav = true
         }
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         self.index = (Int)(offsetX / UIScreen.main.bounds.width)
     }

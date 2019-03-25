@@ -56,12 +56,16 @@ class DVImageCell: UICollectionViewCell {
         didSet {
             if progress < 1 {
                 progressLayer.opacity = 1.0
-                let path = UIBezierPath(arcCenter: CGPoint(x: frame.size.width*0.5, y: frame.size.height*0.5), radius: 20, startAngle: CGFloat(Double.pi*(-0.5)), endAngle: CGFloat(Double.pi*(progress*2-0.5)), clockwise: true)
-                path.addLine(to: CGPoint(x: frame.size.width*0.5, y: frame.size.height*0.5))
-                path.addLine(to: CGPoint(x: frame.size.width*0.5, y: frame.size.height*0.5-20))
-                progressLayer.path = path.cgPath
+                DispatchQueue.main.async {
+                    let path = UIBezierPath(arcCenter: CGPoint(x: self.frame.size.width*0.5, y: self.frame.size.height*0.5), radius: 20, startAngle: CGFloat(Double.pi*(-0.5)), endAngle: CGFloat(Double.pi*(self.progress*2-0.5)), clockwise: true)
+                    path.addLine(to: CGPoint(x: self.frame.size.width*0.5, y: self.frame.size.height*0.5))
+                    path.addLine(to: CGPoint(x: self.frame.size.width*0.5, y: self.frame.size.height*0.5-20))
+                    self.progressLayer.path = path.cgPath
+                }
             } else {
-                progressLayer.opacity = 0
+                DispatchQueue.main.async {
+                    self.progressLayer.opacity = 0
+                }
             }
         }
     }
